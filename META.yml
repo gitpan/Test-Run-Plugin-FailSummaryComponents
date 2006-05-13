@@ -1,0 +1,24 @@
+---
+name: Test-Run-Plugin-FailSummaryComponents
+version: 0.0100_01
+author:
+  - Shlomi Fish <shlomif@iglu.org.il>
+abstract: |-
+  A Test::Run plugin that
+  customizes the failure summary line.
+license: bsd
+resources:
+  license: http://www.opensource.org/licenses/bsd-license.php
+requires:
+  Scalar::Util: 0
+  Term::ANSIColor: 0
+  Test::More: 0
+  Test::Run::Obj: 0
+provides:
+  Test::Run::Plugin::FailSummaryComponents:
+    file: lib/Test/Run/Plugin/FailSummaryComponents.pm
+    version: 0.0100_01
+generated_by: Module::Build version 0.2704
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
