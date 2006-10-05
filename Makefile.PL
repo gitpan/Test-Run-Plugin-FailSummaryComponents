@@ -2,16 +2,16 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
+          'PL_FILES' => {},
+          'INSTALLDIRS' => 'site',
           'NAME' => 'Test::Run::Plugin::FailSummaryComponents',
+          'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/Test/Run/Plugin/FailSummaryComponents.pm',
           'PREREQ_PM' => {
-                           'Scalar::Util' => '0',
-                           'Term::ANSIColor' => '0',
-                           'Test::More' => '0',
-                           'Test::Run::Obj' => '0'
-                         },
-          'INSTALLDIRS' => 'site',
-          'EXE_FILES' => [],
-          'PL_FILES' => {}
+                           'Test::More' => 0,
+                           'Scalar::Util' => 0,
+                           'Term::ANSIColor' => 0,
+                           'Test::Run::Obj' => 0
+                         }
         )
 ;

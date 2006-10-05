@@ -1,8 +1,8 @@
 ---
 name: Test-Run-Plugin-FailSummaryComponents
-version: 0.0100_01
+version: 0.0100_02
 author:
-  - Shlomi Fish <shlomif@iglu.org.il>
+  - 'Shlomi Fish <shlomif@iglu.org.il>'
 abstract: |-
   A Test::Run plugin that
   customizes the failure summary line.
@@ -17,8 +17,8 @@ requires:
 provides:
   Test::Run::Plugin::FailSummaryComponents:
     file: lib/Test/Run/Plugin/FailSummaryComponents.pm
-    version: 0.0100_01
-generated_by: Module::Build version 0.2704
+    version: 0.0100_02
+generated_by: Module::Build version 0.2805
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2
