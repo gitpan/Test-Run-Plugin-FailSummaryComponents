@@ -6,6 +6,7 @@ use warnings;
 use Test::Run::Obj;
 use Test::Run::Plugin::FailSummaryComponents;
 
+use Test::Trap qw( trap $trap :flow:stderr(systemsafe):stdout(systemsafe):warn );
 package MyTestRun;
 
 use vars qw(@ISA);
@@ -20,39 +21,19 @@ sub tester
 {
     my $args = shift;
 
-    open ALTOUT, ">", "altout.txt";
-    open SAVEOUT, ">&STDOUT";
-    open STDOUT, ">&ALTOUT";
-
-    open ALTERR, ">", "alterr.txt";
-    open SAVEERR, ">&STDERR";
-    open STDERR, ">&ALTERR";
-
     my $tester = MyTestRun->new(
         $args,
         );
 
-    eval {
+    trap {
     $tester->runtests();
     };
-    my $err = $@;
 
-    open STDOUT, ">&SAVEOUT";
-    close(SAVEOUT);
-    close(ALTOUT);
-
-    open STDERR, ">&SAVEERR";
-    close(SAVEERR);
-    close(ALTERR);
-
-    my $text = do { local $/; local *I; open I, "<", "altout.txt"; <I>};   
-    my $stderr = do { local $/; local *I; open I, "<", "alterr.txt"; <I>};   
-
-    return 
+    return
     {
-        'stdout' => $text,
-        'stderr' => $stderr,
-        'exception' => $err,
+        'stdout' => $trap->stdout(),
+        'stderr' => $trap->stderr(),
+        'exception' => $trap->die(),
     };
 }
 
@@ -72,7 +53,7 @@ sub tester
 }
 
 {
-    my $results = tester({test_files => 
+    my $results = tester({test_files =>
         [
             "t/sample-tests/one-ok.t",
             "t/sample-tests/one-fail.t"
@@ -89,7 +70,7 @@ sub tester
 }
 
 {
-    my $results = tester({test_files => 
+    my $results = tester({test_files =>
         [
             "t/sample-tests/one-ok.t",
             "t/sample-tests/one-fail.t"
@@ -107,7 +88,7 @@ sub tester
 
 {
     my $results = tester({
-        test_files => 
+        test_files =>
         [
             "t/sample-tests/one-ok.t",
             "t/sample-tests/one-fail.t"

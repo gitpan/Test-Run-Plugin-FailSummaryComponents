@@ -1,24 +1,28 @@
 ---
-name: Test-Run-Plugin-FailSummaryComponents
-version: 0.0100_02
+abstract: 'A Test::Run plugin that'
 author:
   - 'Shlomi Fish <shlomif@iglu.org.il>'
-abstract: |-
-  A Test::Run plugin that
-  customizes the failure summary line.
-license: bsd
-resources:
-  license: http://www.opensource.org/licenses/bsd-license.php
-requires:
-  Scalar::Util: 0
-  Term::ANSIColor: 0
-  Test::More: 0
-  Test::Run::Obj: 0
+build_requires:
+  Test::Trap: '0'
+configure_requires:
+  Module::Build: '0.36'
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4205, CPAN::Meta::Converter version 2.140640'
+license: mit
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: Test-Run-Plugin-FailSummaryComponents
 provides:
   Test::Run::Plugin::FailSummaryComponents:
     file: lib/Test/Run/Plugin/FailSummaryComponents.pm
-    version: 0.0100_02
-generated_by: Module::Build version 0.2805
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+    version: 0.0100_03
+requires:
+  Scalar::Util: '0'
+  Term::ANSIColor: '0'
+  Test::More: '0'
+  Test::Run::Obj: '0'
+  perl: '5.008'
+resources:
+  license: http://www.opensource.org/licenses/mit-license.php
+version: 0.0100_03

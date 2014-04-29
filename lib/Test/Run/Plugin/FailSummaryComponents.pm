@@ -3,11 +3,15 @@ package Test::Run::Plugin::FailSummaryComponents;
 use warnings;
 use strict;
 
-use NEXT;
+use 5.008;
+
+use Moose;
+
+use MRO::Compat;
+
 use Scalar::Util ();
 
-use base 'Test::Run::Base';
-use base 'Class::Accessor';
+extends ("Test::Run::Base");
 
 =head1 NAME
 
@@ -16,7 +20,7 @@ customizes the failure summary line.
 
 =cut
 
-our $VERSION = '0.0100_02';
+our $VERSION = '0.0100_03';
 
 my @params = (qw(
     failsumm_remove_test_scripts_number
@@ -24,31 +28,22 @@ my @params = (qw(
     failsumm_remove_subtests_percent
 ));
 
-__PACKAGE__->mk_accessors(
-    @params
-);
+has 'failsumm_remove_subtests_percent' => (is => "rw", isa => "Bool",);
+has 'failsumm_remove_test_scripts_number' => (is => "rw", isa => "Bool",);
+has 'failsumm_remove_test_scripts_percent' => (is => "rw", isa => "Bool",);
 
-sub _get_simple_params
-{
-    my $self = shift;
-    return 
-    [
-        @params,
-        @{$self->NEXT::_get_simple_params()}
-    ];
-}
 
 
 =head1 SYNOPSIS
 
     package MyTestRun;
-    
+
     use vars qw(@ISA);
 
     @ISA = (qw(Test::Run::Plugin::FailSummaryComponents Test::Run::Obj));
 
     my $tester = MyTestRun->new(
-        test_files => 
+        test_files =>
         [
             "t/sample-tests/one-ok.t",
             "t/sample-tests/several-oks.t"
@@ -85,7 +80,7 @@ sub _get_fail_test_scripts_string
     }
     else
     {
-        return $self->NEXT::_get_fail_test_scripts_string();
+        return $self->next::method();
     }
 }
 
@@ -98,7 +93,7 @@ sub _get_fail_tests_good_percent_string
     }
     else
     {
-        return $self->NEXT::_get_fail_tests_good_percent_string();
+        return $self->next::method();
     }
 }
 
@@ -108,12 +103,12 @@ sub _get_sub_percent_msg
 
     if (!$self->failsumm_remove_subtests_percent())
     {
-        return $self->NEXT::_get_sub_percent_msg();
+        return $self->next::method();
     }
 
     my $tot = $self->tot();
     return sprintf(" %d/%d subtests failed.",
-        $tot->max() - $tot->ok(), $tot->max(), 
+        $tot->max() - $tot->ok(), $tot->max(),
         );
 }
 

@@ -1,13 +1,25 @@
 use strict;
 use warnings;
-use Module::Build;
+use File::Spec;
+use lib File::Spec->catdir(File::Spec->curdir(), "inc");
 
-my $builder = Module::Build->new(
+use Test::Run::Builder;
+
+my $builder = Test::Run::Builder->new(
     module_name         => 'Test::Run::Plugin::FailSummaryComponents',
-    license             => 'bsd',
+    license             => 'mit',
     dist_author         => 'Shlomi Fish <shlomif@iglu.org.il>',
     dist_version_from   => 'lib/Test/Run/Plugin/FailSummaryComponents.pm',
+    configure_requires =>
+    {
+        'Module::Build' => '0.36',
+    },
+    build_requires =>
+    {
+        'Test::Trap' => 0,
+    },
     requires => {
+        'perl' => '5.008',
         'Test::More' => 0,
         'Term::ANSIColor' => 0,
         'Scalar::Util' => 0,

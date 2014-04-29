@@ -1,0 +1,50 @@
+{
+   "abstract" : "A Test::Run plugin that",
+   "author" : [
+      "Shlomi Fish <shlomif@iglu.org.il>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4205",
+   "license" : [
+      "mit"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Test-Run-Plugin-FailSummaryComponents",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::Trap" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.36"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Scalar::Util" : "0",
+            "Term::ANSIColor" : "0",
+            "Test::More" : "0",
+            "Test::Run::Obj" : "0",
+            "perl" : "5.008"
+         }
+      }
+   },
+   "provides" : {
+      "Test::Run::Plugin::FailSummaryComponents" : {
+         "file" : "lib/Test/Run/Plugin/FailSummaryComponents.pm",
+         "version" : "0.0100_03"
+      }
+   },
+   "release_status" : "testing",
+   "resources" : {
+      "license" : [
+         "http://www.opensource.org/licenses/mit-license.php"
+      ]
+   },
+   "version" : "0.0100_03"
+}
